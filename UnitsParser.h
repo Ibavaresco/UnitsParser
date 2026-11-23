@@ -291,6 +291,23 @@ const char	*GetUnitSymbol			( unitid_t UnitId );
 const char	*GetUnitDescription		( unitid_t UnitId );
 unitid_t	ParseUnit				( const char **p );
 /*============================================================================*/
+typedef struct
+	{
+	unitsignature_t	Unit;
+	double			Value;
+	} dimensionalvalue_t;
+/*============================================================================*/
+#define	STYLE_ANY			0
+#define	STYLE_DIVISION_BAR	1
+#define	STYLE_SUPERSCRIPT	2
+#define	STYLE_CIRCUMFLEX	3
+#define	STYLE_UNSIGNED		4
+#define	STYLE_SIGNED		5
+/*============================================================================*/
+#define	REJECT_PREFIX		1
+#define REJECT_DIVIDER		2
+#define REJECT_MILTIPLIER	4
+/*============================================================================*/
 #define	RESULT_OK										  1
 #define	RESULT_NO_UNIT									  0
 #define	RESULT_NO_EXPONENT								  0
@@ -302,30 +319,42 @@ unitid_t	ParseUnit				( const char **p );
 #define	RESULT_ERROR_MORE_THAN_ONE_DIVISION				 -6
 #define	RESULT_ERROR_INVALID_EXPONENT_VALUE				 -7
 #define	RESULT_ERROR_EXPONENT_WITH_MORE_THAN_ONE_DIGIT	 -8
+#define	RESULT_ERROR_UNMATCHED_PARENTHESIS				 -9
+#define RESULT_ERROR_MISSING_SPACE						-10
 
-#define	RESULT_ERROR_VALUE_NOT_FOUND					 -9
-#define	RESULT_INVALID_NUMBER							-10
-#define	RESULT_ERROR_WRONG_UNIT							-11
-#define	RESULT_ERROR_UNIT_NOT_SUPPLIED					-12
+#define	RESULT_ERROR_VALUE_NOT_FOUND					-11
+#define	RESULT_INVALID_NUMBER							-12
+#define	RESULT_ERROR_WRONG_UNIT							-13
+#define	RESULT_ERROR_UNIT_NOT_SUPPLIED					-14
 /*============================================================================*/
-int			ParsePrefixedUnit			( const char **p, prefixid_t *PrefixId, unitid_t *UnitId );
-int			ParseUnitsExpression		( const char **p, unitsignature_t *Signature );
-unitid_t	FindUnitId					( const unitsignature_t *Signature );
+int			ParsePrefixedUnit			( const char ** const p, prefixid_t * const PrefixId, unitid_t * const UnitId, int Flags );
+int			ParseUnitsExpression		( const char ** const p, unitsignature_t * const Signature );
+unitid_t	FindUnitId					( const unitsignature_t * const Signature );
 
 int			ParseNumber					( const char ** const p, double *Value );
 /*----------------------------------------------------------------------------*/
 #define	REQUIRE_UNIT					1
 #define	REQUIRE_SPACE					2
 /*----------------------------------------------------------------------------*/
-int			ParseValueWithUnitExpr		( const char **p, double *Value, unitid_t UnitId, int Flags );
+int			ParseValueWithUnitExpr		( const char ** const p, double * const Value, unitid_t UnitId, int Flags );
 int			ParseValueWithPrefixedUnit	( const char ** const p, double * const Value, unitid_t UnitId, int Flags );
+/*============================================================================*/
+typedef enum
+	{
+	TYPE_INVALID	= -1,
+	TYPE_UNDEFINED,
+	TYPE_NUMBER,
+	TYPE_VALUE
+	} type_t;
 /*----------------------------------------------------------------------------*/
+type_t		EvaluateExpression			( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags );
+/*============================================================================*/
 #define	MODE_USE_CARET					0
 #define	MODE_USE_SUPERSCRIPT			1
 #define	MODE_USE_DIVISION_BAR			0
 #define	MODE_USE_NEGATIVE_EXPONENTS		2
 /*----------------------------------------------------------------------------*/
-int			PrintExpandedUnit			( const unitsignature_t *Signature, int Mode );
+int			PrintExpandedUnit			( const unitsignature_t * const Signature, int Mode );
 /*============================================================================*/
 int			TestUnits					( void );
 /*============================================================================*/

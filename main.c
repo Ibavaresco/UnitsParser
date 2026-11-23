@@ -27,6 +27,7 @@
 #include <string.h>
 #include "UnitsParser.h"
 /*============================================================================*/
+#if 0
 static void TestAllUnits( void )
 	{
 	unitid_t	Unit;
@@ -81,7 +82,9 @@ static void TestUnitExpressions( void )
 		printf( "\nEnter a valid unit expression optionally (empty input to stop):" );
 		}
 	}
+#endif
 /*============================================================================*/
+#if 0
 int main( void )
 	{
 	const char		*p;
@@ -165,5 +168,58 @@ int main( void )
 			printf( "Nao achou %d (%s) -> %d (%s)\n", i, UnitsAlias[i].String, r, UnitsAlias[r].String );
 		}
 #endif
+	}
+#endif
+/*============================================================================*/
+int main( void )
+	{
+	dimensionalvalue_t	Value;
+	int					Multiplier;
+	int					Style;
+	char				Str[256];
+	const char			*p;
+
+//	TestUnits();
+
+	while( 1 )
+		{
+		printf( "\nEnter unit expression: " );
+		fgets( Str, sizeof Str, stdin );
+		if( strlen( Str ) == 0 || Str[0] == '\n' )
+			return 0;
+
+		Multiplier	= 0;
+		Style		= STYLE_ANY;
+		p			= Str;
+
+		memset( &Value, 0x00, sizeof Value );
+
+//		ParseValue( &p, &Value, &Multiplier, &Style, REQUIRE_UNIT | REQUIRE_SPACE );
+		if( EvaluateExpression( &p, &Value, &Multiplier, &Style, REQUIRE_SPACE ) <= TYPE_UNDEFINED )
+			{
+			printf( "\nError: %s       %*s^\n", Str, (int)( p - Str ), "" );
+			}
+		else
+			{
+			unitid_t	UnitId	= FindUnitId( &Value.Unit );
+
+			printf( "\nValue = %lg ", Value.Value );
+
+			if( UnitId >= UNIT_NONE )
+				{
+				printf( "%s ( \"%s\" = ", GetUnitSymbol( UnitId ), GetUnitName( UnitId ));
+				PrintExpandedUnit( &Value.Unit, MODE_USE_SUPERSCRIPT );
+				printf( " = %s )\n", GetUnitDescription( UnitId ) );
+				}
+			else
+				{
+				PrintExpandedUnit( &Value.Unit, MODE_USE_SUPERSCRIPT );
+				printf( "\n" );
+				}
+
+			}
+		}
+
+	return 0;
 	}
 /*============================================================================*/

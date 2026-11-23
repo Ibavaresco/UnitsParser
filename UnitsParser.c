@@ -278,9 +278,9 @@ static const units_t	Units[]	=
 	[UNIT_PASCAL]					= { .Id = UNIT_PASCAL,						.Name = "pascal",	 					.Symbol = "Pa",			.WhatItMeasures = "pressure",				.Exponents = { .Exp_s = -2, .Exp_m = -1, .Exp_kg =  1, .Exp_A =  0, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
 	[UNIT_JOULE]					= { .Id = UNIT_JOULE,						.Name = "joule",	 					.Symbol = "J",			.WhatItMeasures = "work/energy",			.Exponents = { .Exp_s = -2, .Exp_m =  2, .Exp_kg =  1, .Exp_A =  0, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
 	[UNIT_WATT]						= { .Id = UNIT_WATT,						.Name = "watt",		 					.Symbol = "W",			.WhatItMeasures = "power",					.Exponents = { .Exp_s = -3, .Exp_m =  2, .Exp_kg =  1, .Exp_A =  0, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
-	[UNIT_COULOMB]					= { .Id = UNIT_COULOMB,						.Name = "coulomb",	 					.Symbol = "C",			.WhatItMeasures = "electrical charge",		.Exponents = { .Exp_s =  1, .Exp_m =  0, .Exp_kg =  0, .Exp_A =  1, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
-	[UNIT_VOLT]						= { .Id = UNIT_VOLT,						.Name = "volt",		 					.Symbol = "V",			.WhatItMeasures = "electrical potential",	.Exponents = { .Exp_s = -3, .Exp_m =  2, .Exp_kg =  1, .Exp_A = -1, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
-	[UNIT_OHM]						= { .Id = UNIT_OHM,	 						.Name = "ohm",		 					.Symbol = "\xce\xa9",	.WhatItMeasures = "electrical resistance",	.Exponents = { .Exp_s = -3, .Exp_m =  2, .Exp_kg =  1, .Exp_A = -2, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
+	[UNIT_COULOMB]					= { .Id = UNIT_COULOMB,						.Name = "coulomb",	 					.Symbol = "C",			.WhatItMeasures = "electric charge",		.Exponents = { .Exp_s =  1, .Exp_m =  0, .Exp_kg =  0, .Exp_A =  1, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
+	[UNIT_VOLT]						= { .Id = UNIT_VOLT,						.Name = "volt",		 					.Symbol = "V",			.WhatItMeasures = "electric potential",	.Exponents = { .Exp_s = -3, .Exp_m =  2, .Exp_kg =  1, .Exp_A = -1, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
+	[UNIT_OHM]						= { .Id = UNIT_OHM,	 						.Name = "ohm",		 					.Symbol = "ohm" /*"\xce\xa9"*/,	.WhatItMeasures = "electrical resistance",	.Exponents = { .Exp_s = -3, .Exp_m =  2, .Exp_kg =  1, .Exp_A = -2, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
 	[UNIT_SIEMENS]					= { .Id = UNIT_SIEMENS,						.Name = "siemens",	 					.Symbol = "S",			.WhatItMeasures = "electrical conductance",	.Exponents = { .Exp_s =  3, .Exp_m = -2, .Exp_kg = -1, .Exp_A =  2, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
 	[UNIT_FARAD]					= { .Id = UNIT_FARAD,						.Name = "farad",	 					.Symbol = "F",			.WhatItMeasures = "electrical capacitance",	.Exponents = { .Exp_s =  4, .Exp_m = -2, .Exp_kg = -1, .Exp_A =  2, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
 	[UNIT_HENRY]					= { .Id = UNIT_HENRY,						.Name = "henry",	 					.Symbol = "H",			.WhatItMeasures = "electrical inductance",	.Exponents = { .Exp_s = -2, .Exp_m =  2, .Exp_kg =  1, .Exp_A = -2, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
@@ -303,10 +303,6 @@ static const units_t	Units[]	=
 	[UNIT_METER_PER_SECOND]			= { .Id = UNIT_METER_PER_SECOND,			.Name = "meter per second",				.Symbol = "m/s",		.WhatItMeasures = "speed",					.Exponents = { .Exp_s = -1, .Exp_m =  1, .Exp_kg =  0, .Exp_A =  0, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
 	[UNIT_METER_PER_SECOND_SQUARED]	= { .Id = UNIT_METER_PER_SECOND_SQUARED,	.Name = "meter per second squared",		.Symbol = "m/s\xfd",	.WhatItMeasures = "acceleration",			.Exponents = { .Exp_s = -2, .Exp_m =  1, .Exp_kg =  0, .Exp_A =  0, .Exp_K =  0, .Exp_mol =  0, .Exp_cd =  0 }},
 	};
-/*============================================================================*/
-#define	REJECT_PREFIX		1
-#define REJECT_DIVIDER		2
-#define REJECT_MILTIPLIER	4
 /*============================================================================*/
 typedef struct
 	{
@@ -683,7 +679,7 @@ const unitsalias_t	UnitsAlias[]	=
 		{ .String = "lux"			, .UnitId = UNIT_LUX						, .Flags = IGNORE_CASE },
 		{ .String = "lumen"			, .UnitId = UNIT_LUMEN						, .Flags = IGNORE_CASE },
 		{ .String = "lm"			, .UnitId = UNIT_LUMEN						, .Flags = 0 },
-		{ .String = "llg"			, .UnitId = UNIT_LAND_LEAGUE				, .Flags = 0 },
+		{ .String = "lea"			, .UnitId = UNIT_LAND_LEAGUE				, .Flags = 0 },
 		{ .String = "litro"			, .UnitId = UNIT_LITER						, .Flags = IGNORE_CASE },
 		{ .String = "litre"			, .UnitId = UNIT_LITER						, .Flags = IGNORE_CASE },
 		{ .String = "liter"			, .UnitId = UNIT_LITER						, .Flags = IGNORE_CASE },
@@ -946,14 +942,6 @@ void SkipBlanks( const char ** const p )
 		(*p)++;
 	}
 /*============================================================================*/
-int CheckEnd( const char ** const p )
-	{
-	if( p == NULL || *p == NULL )
-		return 0;
-
-	return isspace( **p ) || strchr( ".*/^\xb2\xb3\xc2\xfc\xfd", **p ) != NULL;
-	}
-/*============================================================================*/
 unitid_t ParseUnit( const char ** const p )
 	{
 	int	i;
@@ -968,7 +956,7 @@ unitid_t ParseUnit( const char ** const p )
 		if(( UnitsAlias[i].Flags & IGNORE_CASE ?
 			strncasecmp( *p, UnitsAlias[i].String, len = strlen( UnitsAlias[i].String )) == 0 :
 			strncmp( *p, UnitsAlias[i].String, len = strlen( UnitsAlias[i].String )) == 0 )
-			&& ( isspace( *(*p+len)) || strchr( ".*/^\xb2\xb3\xc2\xfc\xfd", *(*p+len) ) != NULL ))
+			&& !isalnum( *( *p + len )))
 			{
 			*p += len;
 			return UnitsAlias[i].UnitId;
@@ -978,129 +966,703 @@ unitid_t ParseUnit( const char ** const p )
 	return UNIT_NONE;
 	}
 /*============================================================================*/
-int ParsePrefixedUnit( const char ** const p, prefixid_t * const PrefixId, unitid_t *const UnitId )
+int ParsePrefixedUnit( const char ** const p, prefixid_t * const PrefixId, unitid_t *const UnitId, int Flags )
 	{
 	const char	*q;
 
 	if( p == NULL || *p == NULL || PrefixId == NULL || UnitId == NULL )
 		return RESULT_ERROR_ARGUMENTS;
 
-	q	= *p;
+	*PrefixId	= PREFIX_NONE;
+	q			= *p;
+
+	/* Let's first try to find a unit that is the entire word... */
+	if(( *UnitId = ParseUnit( &q )) > UNIT_NONE )
+		{
+		/* ...found. */
+		*p	= q;
+
+		return RESULT_OK;
+		}
+
+	/* No luck. */
+
+	/* Let's try to find a prefix. Found none... */
+	if(( *PrefixId = ParsePrefix( &q, Flags )) == PREFIX_NONE )
+		/* ...we already know that there is no unit. */
+		return RESULT_NO_UNIT;
+
+	/* Now try to find a unit that is the remaining of the word and that accepts prefixes... */
+	if(( *UnitId = ParseUnit( &q )) > UNIT_NONE && ( Equivalence[*UnitId].Flags & REJECT_PREFIX ) == 0 )
+		{
+		/* ...found. */
+		*p	= q;
+
+		return RESULT_OK;
+		}
+
+	/* We have a problem with prefix 'deci' ('d') before units that begin
+	   in 'a', the prefix will be confused with 'deca' ('da')... */
+	if( *PrefixId == PREFIX_DECA )
+		{
+		/* ...let's try again assuming that the prefix is 'deci' ('d')... */
+		*PrefixId	= PREFIX_DECI;
+		/* ...and skipping only the 'd'. */
+		q	= *p + 1;
+
+		/* Now try to find a unit that is the remaining of the word and that accepts prefixes... */
+		if(( *UnitId = ParseUnit( &q )) > UNIT_NONE && ( Equivalence[*UnitId].Flags & REJECT_PREFIX ) == 0 )
+			{
+			/* ...found. */
+			*p	= q;
+
+			return RESULT_OK;
+			}
+		}
 
 	*PrefixId	= PREFIX_NONE;
-	if(( *UnitId = ParseUnit( p )) <= UNIT_NONE
-		 && (( *PrefixId = ParsePrefix( p, 0 )) < PREFIX_NONE
-			 || ( *UnitId = ParseUnit( p )) <= UNIT_NONE )
-			/* || ( Equivalence[*UnitId].Flags & REJECT_PREFIX ) != 0 )*/ )
+	*UnitId		= UNIT_NONE;
+
+	return RESULT_NO_UNIT;
+	}
+/*============================================================================*/
+int ParseExponent( const char ** const p, int * const Exponent, int *Style )
+	{
+	const char	*q;
+
+	if( p == NULL || *p == NULL || Exponent == NULL || Style == NULL )
+		return RESULT_ERROR_ARGUMENTS;
+
+	*Exponent	= 1;
+	q			= *p;
+
+	/* Superscript 1, 2 or 3 (style 2)... */
+	if( *q == '\xfb' || *q == '\xfd' || *q == '\xfc' )
 		{
-		/* We have a problem with prefix 'deci' ('d') before units that begin
-		   in 'a', the prefix will be confused with 'deca' ('da')... */
-		if( *PrefixId == PREFIX_DECA )
-			{
-			/* ...let's try again assuming that the prefix is 'deci' ('d')... */
-			*PrefixId	= PREFIX_DECI;
-			/* ...and skipping only the 'd'. */
-			*p	= q + 1;
-			if(( *UnitId = ParseUnit( p )) > UNIT_NONE /* && ( Equivalence[*UnitId].Flags & REJECT_PREFIX ) == 0 */ )
-				return RESULT_OK;
-			}
-		*p	= q;
-		*PrefixId	= PREFIX_NONE;
-		*UnitId		= UNIT_NONE;
-		return RESULT_NO_UNIT;
+		if( *Style > STYLE_SUPERSCRIPT )
+			return RESULT_ERROR_MIXING_EXPONENT_STYLES;
+
+		*Style		= STYLE_SUPERSCRIPT;
+		*Exponent	= *q == '\xfb' ? 1 : *q == '\xfd' ? 2 : 3;
+		*p			= ++q;
+
+		return RESULT_OK;
 		}
+
+	/* We found a circumflex... */
+	if( *q == '^' )
+		{
+		int	Sign	= +1;
+
+		if( *Style == STYLE_SUPERSCRIPT )
+			return RESULT_ERROR_MIXING_EXPONENT_STYLES;
+
+		if( *Style == STYLE_ANY )
+			*Style	= STYLE_CIRCUMFLEX;
+		else if( *Style == STYLE_DIVISION_BAR )
+			*Style	= STYLE_UNSIGNED;
+
+		*p	= ++q;
+
+		/* We found a sign for the exponent... */
+		if( *q == '+' || *q == '-' )
+			{
+			/* ...but Style is 3... */
+			if( *Style == STYLE_UNSIGNED )
+				/* ...that doesn't allow signed exponents. */
+				return RESULT_ERROR_MIXING_EXPONENT_STYLES;
+			*Style	= STYLE_SIGNED;
+			/* The sign is negative... */
+			if( *q == '-' )
+				/* ...let's change it. */
+				Sign	= -1;
+			*p	= ++q;
+			}
+
+		if( !isdigit( *q ))
+			return RESULT_ERROR_INVALID_EXPONENT_VALUE;
+
+		*Exponent	= Sign * ( *q - '0' );
+		*p	= ++q;
+
+		/* We found another digit... */
+		if( isdigit( *q ))
+			/* ...but we allow only one digit exponents. */
+			return RESULT_ERROR_EXPONENT_WITH_MORE_THAN_ONE_DIGIT;
+
+		return RESULT_OK;
+		}
+
+	return 0;
+	}
+/*============================================================================*/
+int ParseUnitWithExponent( const char ** const p, unitsignature_t * const Signature, int * const Style, int Flags )
+	{
+	prefixid_t	PrefixId;
+	unitid_t	UnitId;
+	int			Result;
+	int			Exponent;
+
+	if( p == NULL || *p == NULL || Signature == NULL || Style == NULL )
+		return RESULT_ERROR_ARGUMENTS;
+
+	memset( Signature, 0x00, sizeof *Signature );
+	Signature->ScaleFactor	= 1.0;
+
+	if(( Result = ParsePrefixedUnit( p, &PrefixId, &UnitId, Flags )) <= 0 )
+		return Result;
+
+	if(( Result = ParseExponent( p, &Exponent, Style )) < 0 )
+		return Result;
+
+	int	BaseUnit			= Equivalence[UnitId].MainUnitId;
+	Signature->Exp_s		= Exponent * Units[BaseUnit].Exponents.Exp_s;
+	Signature->Exp_m		= Exponent * Units[BaseUnit].Exponents.Exp_m;
+	Signature->Exp_kg		= Exponent * Units[BaseUnit].Exponents.Exp_kg;
+	Signature->Exp_A		= Exponent * Units[BaseUnit].Exponents.Exp_A;
+	Signature->Exp_K		= Exponent * Units[BaseUnit].Exponents.Exp_K;
+	Signature->Exp_mol		= Exponent * Units[BaseUnit].Exponents.Exp_mol;
+	Signature->Exp_cd		= Exponent * Units[BaseUnit].Exponents.Exp_cd;
+	Signature->IsAngle		= Units[BaseUnit].Exponents.IsAngle;
+	Signature->IsRadiation	= Units[BaseUnit].Exponents.IsRadiation;
+	Signature->ScaleFactor	= pow( Prefixes[PrefixId].Value * Equivalence[UnitId].Scale, Exponent );
 
 	return RESULT_OK;
 	}
 /*============================================================================*/
-int ParseExponent( const char ** const p, int *Exponent, int * const HasSignedExponent, int * const CaretUsed, int * const HasDivisionBar )
+int ParseSimpleUnitExpression( const char ** const p, unitsignature_t * const Signature, int * const Multiplier, int * const Style, int Flags )
 	{
-	int	Sign, Value = 0;
+	unitsignature_t	Signature2;
+	const char		*q;
+	int				Result, Result2;
 
-	if( p == NULL || *p == NULL || Exponent == NULL || HasSignedExponent == NULL || CaretUsed == NULL || HasDivisionBar == NULL )
+	if( p == NULL || *p == NULL || Multiplier == NULL || Style == NULL )
 		return RESULT_ERROR_ARGUMENTS;
 
-	*Exponent	= Sign	= *HasDivisionBar ? -1 : 1;
+	memset( Signature, 0x00, sizeof *Signature );
+	Signature->ScaleFactor	= 1.0;
 
-	SkipBlanks( p );
+	q	= *p;
 
-	if( **p == '\xba' )
+	Result	= 0;
+	while( 1 )
 		{
-		if( *CaretUsed == 2 )
-			return RESULT_ERROR_MIXING_EXPONENT_STYLES;
-		*CaretUsed	= 1;
-		*Exponent	= 0 * Sign;
-		(*p)++;
-		return RESULT_OK;
+		memset( &Signature2, 0x00, sizeof Signature2 );
+		Signature2.ScaleFactor	= 1.0;
+
+		if(( Result2 = ParseUnitWithExponent( &q, &Signature2, Style, Flags )) < 0 )
+			return Result2;
+
+		if( Result2 == 0 )
+			return Result;
+
+		Signature->Exp_s	   += Signature2.Exp_s;
+		Signature->Exp_m	   += Signature2.Exp_m;
+		Signature->Exp_kg	   += Signature2.Exp_kg;
+		Signature->Exp_A	   += Signature2.Exp_A;
+		Signature->Exp_K	   += Signature2.Exp_K;
+		Signature->Exp_mol	   += Signature2.Exp_mol;
+		Signature->Exp_cd	   += Signature2.Exp_cd;
+		Signature->IsAngle	   |= Signature2.IsAngle;
+		Signature->IsRadiation |= Signature2.IsRadiation;
+		Signature->ScaleFactor *= Signature2.ScaleFactor;
+
+		Result	= 1;
+
+		*p	= q;
+
+		if(( *q != '.' && *q != '*' ) || ( *Multiplier == '.' && *q == '*' ))
+			return RESULT_OK;
+
+		if( *Multiplier != '\0' && *q != *Multiplier )
+			return RESULT_ERROR_MIXING_DOT_AND_ASTERISK;
+
+		q++;
+		}
+	}
+/*============================================================================*/
+int ParseUnitExpression( const char ** const p, unitsignature_t * const Signature, int *Multiplier, int * const Style, int Flags )
+	{
+	int				HasSpace;
+	int				Result;
+	const char		*q;
+
+	if( p == NULL || *p == NULL || Signature == NULL || Multiplier == NULL )
+		return RESULT_ERROR_ARGUMENTS;
+
+	memset( Signature, 0x00, sizeof *Signature );
+	Signature->ScaleFactor	= 1.0;
+
+	q			= *p;
+
+	HasSpace	= isspace( *q );
+
+	SkipBlanks( &q );
+
+	if(( Result = ParseSimpleUnitExpression( &q, Signature, Multiplier, Style, Flags )) < 0 )
+		return Result;
+
+	if( Result > 0 )
+		{
+		if(( Flags & REQUIRE_SPACE ) && !HasSpace )
+			return RESULT_ERROR_MISSING_SPACE;
+
+		*p	= q;
 		}
 
-	if( **p == '\xb9' || **p == '\xfb' )
+	if( *Style != STYLE_SIGNED && *q == '/' )
 		{
-		if( *CaretUsed == 2 )
-			return RESULT_ERROR_MIXING_EXPONENT_STYLES;
-		*CaretUsed	= 1;
-		*Exponent	= 1 * Sign;
-		(*p)++;
-		return RESULT_OK;
+		unitsignature_t	Signature2;
+
+		if( *++q == '(' )
+			{
+			q++;
+			if(( Result = ParseSimpleUnitExpression( &q, &Signature2, Multiplier, Style, Flags )) <= 0 )
+				return Result;
+
+			*p	= q;
+
+			if( *q != ')' )
+				return RESULT_ERROR_UNMATCHED_PARENTHESIS;
+
+			if( *Style == STYLE_ANY )
+				*Style	= STYLE_DIVISION_BAR;
+
+			q++;
+			}
+		else
+			{
+			int	Style2	= *Style == STYLE_ANY ? STYLE_DIVISION_BAR : *Style;
+
+			if(( Result = ParseSimpleUnitExpression( &q, &Signature2, Multiplier, &Style2, Flags )) <= 0 )
+				return Result;
+
+			*Style	= Style2;
+			}
+
+		Signature->Exp_s	   -= Signature2.Exp_s;
+		Signature->Exp_m	   -= Signature2.Exp_m;
+		Signature->Exp_kg	   -= Signature2.Exp_kg;
+		Signature->Exp_A	   -= Signature2.Exp_A;
+		Signature->Exp_K	   -= Signature2.Exp_K;
+		Signature->Exp_mol	   -= Signature2.Exp_mol;
+		Signature->Exp_cd	   -= Signature2.Exp_cd;
+		Signature->IsAngle	   |= Signature2.IsAngle;
+		Signature->IsRadiation |= Signature2.IsRadiation;
+		Signature->ScaleFactor /= Signature2.ScaleFactor;
 		}
 
-	if( **p == '\xb2' || **p == '\xfd' )
+	SkipBlanks( &q );
+
+	*p	= q;
+
+	return Result;
+	}
+/*============================================================================*/
+int	ParseNumber( const char ** const p, double * const Value )
+	{
+	const char	*q, *r;
+	int			HasDigits;
+
+	if( p == NULL || *p == NULL || Value == NULL )
+		return RESULT_ERROR_ARGUMENTS;
+
+	*Value	= 0.0;
+	q		= *p;
+
+	SkipBlanks( &q );
+
+	if( !isdigit( *q ) && *q != '+' && *q != '-' && *q != '.' )
+		return 0;
+
+	r	= q;
+
+	if( *q == '+' || *q == '-' )
+		q++;
+
+	for( HasDigits = 0; isdigit( *q ); q++ )
+		HasDigits	= 1;
+
+	if( *q == '.' )
+		q++;
+
+	for( ; isdigit( *q ); q++ )
+		HasDigits	= 1;
+
+	if( !HasDigits )
+		return 0;
+
+	*p	= q;
+
+	if( *q == 'e' || *q == 'E' )
 		{
-		if( *CaretUsed == 2 )
-			return RESULT_ERROR_MIXING_EXPONENT_STYLES;
-		*CaretUsed	= 1;
-		*Exponent	= 2 * Sign;
-		(*p)++;
-		return RESULT_OK;
+		q++;
+
+		if( *q == '+' || *q == '-' )
+			q++;
+
+		*p	= q;
+
+		if( !isdigit( *q ))
+			return RESULT_INVALID_NUMBER;
+
+		for( ; isdigit( *q ); q++ )
+			{}
 		}
 
-	if( **p == '\xb3' || **p == '\xfc' )
-		{
-		if( *CaretUsed == 2 )
-			return RESULT_ERROR_MIXING_EXPONENT_STYLES;
-		*CaretUsed	= 1;
-		*Exponent	= 3 * Sign;
-		(*p)++;
-		return RESULT_OK;
-		}
+/*
+	if( *q == '_' || isalpha( *q ))
+		return RESULT_INVALID_NUMBER;
+*/
 
-	if( **p != '^' )
-		return RESULT_NO_EXPONENT;
+	*p	= q;
 
-	SkipBlanks( p );
-
-	(*p)++;
-
-	if( *CaretUsed == 1 )
-		return RESULT_ERROR_MIXING_EXPONENT_STYLES;
-	*CaretUsed	= 2;
-
-	SkipBlanks( p );
-
-	if( **p == '-' || **p == '+' )
-		{
-		*HasSignedExponent	=  1;
-		if( **p == '-' )
-			Sign			= -1;
-		(*p)++;
-		}
-
-	if( !isdigit( **p ) || **p == '0' )
-		return RESULT_ERROR_INVALID_EXPONENT_VALUE;
-
-	Value	= ( **p - '0' ) * Sign;
-	(*p)++;
-
-	if( isdigit( **p ))
-		return RESULT_ERROR_EXPONENT_WITH_MORE_THAN_ONE_DIGIT;
-
-	*Exponent	= Value;
+	if( sscanf( r, "%lf", Value ) < 1 )
+		return RESULT_INVALID_NUMBER;
 
 	return RESULT_OK;
+	}
+/*============================================================================*/
+static int ParseValue( const char ** const p, dimensionalvalue_t * const Value, int *Multiplier, int *Style, int Flags )
+	{
+	int		Result;
+
+	if( p == NULL || *p == NULL || Multiplier == NULL || Style == NULL )
+		return RESULT_ERROR_ARGUMENTS;
+
+	if(( Result = ParseNumber( p, &Value->Value )) <= 0 )
+		return Result;
+
+	if(( Result = ParseUnitExpression( p, &Value->Unit, Multiplier, Style, Flags )) < 0 )
+		return Result;
+
+	Value->Value	*= Value->Unit.ScaleFactor;
+	Value->Unit.ScaleFactor	= 1.0;
+
+	return RESULT_OK;
+	}
+/*============================================================================*/
+typedef enum
+	{
+	TOKEN_ERROR		= -2,
+	TOKEN_INVALID	= -1,
+	TOKEN_EOL		=  0,
+	TOKEN_OPENPAR,
+	TOKEN_CLOSEPAR,
+	TOKEN_PLUS,
+	TOKEN_MINUS,
+	TOKEN_ASTERISK,
+	TOKEN_SLASH,
+	TOKEN_CIRCUMFLEX,
+	TOKEN_NUMBER,
+	TOKEN_VALUE
+	} token_t;
+/*============================================================================*/
+static token_t GetToken( const char ** const p, dimensionalvalue_t * Value, int *Multiplier, int *Style, int Flags )
+	{
+	dimensionalvalue_t	Dummy;
+
+	if( p == NULL || *p == NULL || Multiplier == NULL || Style == NULL )
+		return TOKEN_ERROR;
+
+	if( Value == NULL )
+		Value	= &Dummy;
+
+	while( isspace( **p ))
+		(*p)++;
+
+	if( **p == '\0' )
+		return TOKEN_EOL;
+
+	switch( *(*p)++ )
+		{
+		case '(':
+			return TOKEN_OPENPAR;
+		case ')':
+			return TOKEN_CLOSEPAR;
+		case '+':
+			return TOKEN_PLUS;
+		case '-':
+			return TOKEN_MINUS;
+		case '*':
+			return TOKEN_ASTERISK;
+		case '/':
+			return TOKEN_SLASH;
+		case '^':
+			return TOKEN_CIRCUMFLEX;
+		}
+
+	(*p)--;
+
+	if( ParseValue( p, Value, Multiplier, Style, Flags ) < RESULT_OK )
+		return TOKEN_INVALID;
+
+	if( Value->Unit.IsAngle || Value->Unit.IsRadiation )
+		return TOKEN_VALUE;
+	for( int i = 0; i < LENGTH( Value->Unit.Exponents ); i++ )
+		if( Value->Unit.Exponents[i] != 0 )
+			return TOKEN_VALUE;
+
+	return TOKEN_NUMBER;
+	}
+/*============================================================================*/
+static type_t EvaluateValueExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
+	{
+	token_t		Token;
+	type_t		Type1;
+
+	Token = GetToken( p, Result, Multiplier, Style, Flags );
+
+	switch( Token )
+		{
+		/*--------------------------------------------------------------------*/
+		case TOKEN_PLUS:
+			/* The unary plus sign does nothing, just returns the expression that follows it. */
+			Type1 = EvaluateValueExpression( p, Result, Multiplier, Style, Flags );
+
+			if( Type1 != TYPE_NUMBER && Type1 != TYPE_VALUE )
+				{
+				printf( "\nInvalid expression" );
+				return TYPE_INVALID;
+				}
+
+			return Type1;
+		/*--------------------------------------------------------------------*/
+		case TOKEN_MINUS:
+			/* The unary minus sign inverts the sign of the expression. */
+			Type1	= EvaluateValueExpression( p, Result, Multiplier, Style, Flags );
+
+			if( Type1 != TYPE_NUMBER && Type1 != TYPE_VALUE )
+				{
+				printf( "\nInvalid expression" );
+				return TYPE_INVALID;
+				}
+
+			Result->Value	= -Result->Value;
+			return Type1;
+		/*--------------------------------------------------------------------*/
+		case TOKEN_NUMBER:
+			return TYPE_NUMBER;
+		/*--------------------------------------------------------------------*/
+		case TOKEN_VALUE:
+			return TYPE_VALUE;
+		/*--------------------------------------------------------------------*/
+		case TOKEN_OPENPAR:
+			Type1			= EvaluateExpression( p, Result, Multiplier, Style, Flags );
+			Token			= GetToken( p, NULL, Multiplier, Style, Flags );;
+			if( Token != TOKEN_CLOSEPAR )
+				{
+				printf( "\nMissing \")\"" );
+		default:
+				return TYPE_INVALID;
+				}
+			return Type1;
+		/*--------------------------------------------------------------------*/
+		}
+
+	/* Should never reach here. */
+	return TYPE_INVALID;
+	}
+/*============================================================================*/
+static type_t EvaluatePowerExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
+	{
+	const char	*q;
+	token_t		Token;
+	type_t		Type1, Type2;
+
+	Type1	= EvaluateValueExpression( p, Result, Multiplier, Style, Flags );
+
+	q		= *p;
+
+	while(( Token = GetToken( &q, NULL, Multiplier, Style, Flags )) == TOKEN_CIRCUMFLEX )
+		{
+		dimensionalvalue_t	Operand2;
+
+		if( Type1 != TYPE_NUMBER && Type1 != TYPE_VALUE )
+			{
+			printf( "\nInvalid argument for operator" );
+			return TYPE_INVALID;
+			}
+
+		*p		= q;
+
+		Type2	= EvaluatePowerExpression( &q, &Operand2, Multiplier, Style, Flags );
+
+		if( Type2 != TYPE_NUMBER )
+			{
+			printf( "\nCan only raise to a dimensionless power." );
+			return TYPE_INVALID;
+			}
+
+		if( Type1 == TYPE_VALUE )
+			{
+			if( modf( Operand2.Value, NULL ) != 0 )
+				{
+				printf( "\nCan only raise a dimensional value to an integer power." );
+				return TYPE_INVALID;
+				}
+			Result->Value				= pow( Result->Value, Operand2.Value );
+			Result->Unit.Exp_s		   *= Operand2.Value;
+			Result->Unit.Exp_m		   *= Operand2.Value;
+			Result->Unit.Exp_kg		   *= Operand2.Value;
+			Result->Unit.Exp_A		   *= Operand2.Value;
+			Result->Unit.Exp_K		   *= Operand2.Value;
+			Result->Unit.Exp_mol	   *= Operand2.Value;
+			Result->Unit.Exp_cd		   *= Operand2.Value;
+			}
+		else
+			Result->Value	= pow( Result->Value, Operand2.Value );
+
+		*p		= q;
+		}
+
+	return Type1;
+	}
+/*============================================================================*/
+static type_t EvaluateMultiplicativeExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
+	{
+	const char			*q;
+	token_t				Token;
+	type_t				Type1, Type2;
+
+	Type1	= EvaluatePowerExpression( p, Result, Multiplier, Style, Flags );
+
+	q		= *p;
+
+	while(( Token = GetToken( &q, NULL, Multiplier, Style, Flags )) == TOKEN_ASTERISK || Token == TOKEN_SLASH )
+		{
+		dimensionalvalue_t	Operand2;
+
+		if( Type1 != TYPE_NUMBER && Type1 != TYPE_VALUE )
+			{
+			printf( "\nInvalid argument for operator" );
+			return TYPE_INVALID;
+			}
+
+		*p	= q;
+
+		Type2	= EvaluatePowerExpression( &q, &Operand2, Multiplier, Style, Flags );
+
+		if( Type2 != TYPE_NUMBER && Type2 != TYPE_VALUE )
+			{
+			printf( "\nInvalid argument for operator" );
+			return TYPE_INVALID;
+			}
+
+		switch( Token )
+			{
+			default:
+				printf( "\nInternal error" );
+				return TYPE_INVALID;
+
+			case TOKEN_ASTERISK:
+				Result->Value			   *= Operand2.Value;
+				Result->Unit.Exp_s		   += Operand2.Unit.Exp_s;
+				Result->Unit.Exp_m		   += Operand2.Unit.Exp_m;
+				Result->Unit.Exp_kg		   += Operand2.Unit.Exp_kg;
+				Result->Unit.Exp_A		   += Operand2.Unit.Exp_A;
+				Result->Unit.Exp_K		   += Operand2.Unit.Exp_K;
+				Result->Unit.Exp_mol	   += Operand2.Unit.Exp_mol;
+				Result->Unit.Exp_cd		   += Operand2.Unit.Exp_cd;
+				Result->Unit.IsAngle	   |= Operand2.Unit.IsAngle;
+				Result->Unit.IsRadiation   |= Operand2.Unit.IsRadiation;
+				break;
+
+			case TOKEN_SLASH:
+				if( Operand2.Value == 0 )
+					{
+					printf( "\nDivide by zero" );
+					return TYPE_INVALID;
+					}
+				Result->Value			   /= Operand2.Value;
+				Result->Unit.Exp_s		   -= Operand2.Unit.Exp_s;
+				Result->Unit.Exp_m		   -= Operand2.Unit.Exp_m;
+				Result->Unit.Exp_kg		   -= Operand2.Unit.Exp_kg;
+				Result->Unit.Exp_A		   -= Operand2.Unit.Exp_A;
+				Result->Unit.Exp_K		   -= Operand2.Unit.Exp_K;
+				Result->Unit.Exp_mol	   -= Operand2.Unit.Exp_mol;
+				Result->Unit.Exp_cd		   -= Operand2.Unit.Exp_cd;
+				Result->Unit.IsAngle	   |= Operand2.Unit.IsAngle;
+				Result->Unit.IsRadiation   |= Operand2.Unit.IsRadiation;
+				break;
+			}
+
+		*p		= q;
+		}
+
+	return Type1;
+	}
+/*============================================================================*/
+type_t EvaluateExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
+	{
+	const char	*q;
+	token_t		Token;
+	type_t		Type1, Type2;
+
+	Type1	= EvaluateMultiplicativeExpression( p, Result, Multiplier, Style, Flags );
+
+	q		= *p;
+
+	while(( Token = GetToken( &q, NULL, Multiplier, Style, Flags )) == TOKEN_PLUS || Token == TOKEN_MINUS )
+		{
+		dimensionalvalue_t	Operand2;
+
+		if( Type1 != TYPE_NUMBER && Type1 != TYPE_VALUE )
+			{
+			printf( "\nInvalid argument for operator" );
+			return TYPE_INVALID;
+			}
+
+		Type2	= EvaluateMultiplicativeExpression( &q, &Operand2, Multiplier, Style, Flags );
+
+		if( Type2 != TYPE_NUMBER && Type2 != TYPE_VALUE )
+			{
+			printf( "\nInvalid argument for operator" );
+			return TYPE_INVALID;
+			}
+
+		if( Type1 != Type2 )
+			{
+			printf( "\nCannot add or subtract a dimensional value with a dimensionless value." );
+			return TYPE_INVALID;
+			}
+
+		if( Result->Unit.IsRadiation != Operand2.Unit.IsRadiation || Result->Unit.IsAngle != Operand2.Unit.IsAngle )
+			{
+			printf( "\nCannot add or subtract values that have different units." );
+			return TYPE_INVALID;
+			}
+
+		for( int i = 0; i < LENGTH( Operand2.Unit.Exponents ); i++ )
+			if( Result->Unit.Exponents[i] != Operand2.Unit.Exponents[i] )
+				{
+				printf( "\nCannot add or subtract values that have different units." );
+				return TYPE_INVALID;
+				}
+
+		*p		= q;
+
+		switch( Token )
+			{
+			default:
+				printf( "\nInternal error" );
+				return TYPE_INVALID;
+
+			case TOKEN_PLUS:
+				Result->Value  += Operand2.Value;
+				break;
+			case TOKEN_MINUS:
+				Result->Value  -= Operand2.Value;
+				break;
+			}
+
+		*p		= q;
+		}
+
+	return Type1;
 	}
 /*============================================================================*/
 #if 1
-/*============================================================================*/
 int	PrintExpandedUnit( const unitsignature_t * const Signature, int Mode )
 	{
 	static const char	*BaseUnits[]			= { "kg", "m", "A", "s", "K", "cd", "mol" };
@@ -1169,7 +1731,7 @@ int	PrintExpandedUnit( const unitsignature_t * const Signature, int Mode )
 			}
 		printf( "%s", NumberOfNegativeExponents > 1 ? ")" : "" );
 		}
-	printf( "\n" );
+//	printf( "\n" );
 
 	return UseSuperscript;
 	}
@@ -1236,210 +1798,6 @@ static void PrintExpandedUnit( int Exp_s, int Exp_m, int Exp_kg, int Exp_A, int 
 	}
 #endif
 /*============================================================================*/
-int ParseUnitsExpression( const char ** const p, unitsignature_t *const Signature )
-	{
-	long double	Scale				= 1.0;
-	int			Exp_s				= 0;
-	int			Exp_m				= 0;
-	int			Exp_kg				= 0;
-	int			Exp_A				= 0;
-	int			Exp_K				= 0;
-	int			Exp_mol				= 0;
-	int			Exp_cd				= 0;
-	int			IsAngle				= 0;
-	int			IsRadiation			= 0;
-
-	unitid_t	UnitId;
-	prefixid_t	PrefixId;
-
-	int			Exp;
-	int			HasSignedExponent	= 0;
-	int			HasDivisionBar		= 0;
-	int			CaretUsed			= 0;
-	char		Multiplier			= 0;
-
-	if( p == NULL || *p == NULL || Signature == NULL )
-		return RESULT_ERROR_ARGUMENTS;
-
-	SkipBlanks( p );
-
-	while( 1 )
-		{
-		int	Result;
-
-		if( **p == '/' )
-			{
-			if( HasDivisionBar )
-				return RESULT_ERROR_MORE_THAN_ONE_DIVISION;
-			if( HasSignedExponent )
-				return RESULT_ERROR_DIVISION_WITH_NEGATIVE_EXPONENT;
-			HasDivisionBar	= 1;
-			(*p)++;
-			}
-
-		if( ParsePrefixedUnit( p, &PrefixId, &UnitId ) <= 0 )
-			return RESULT_ERROR_UNIT_NOT_FOUND;
-
-		//printf( "%s %s\n", Prefixes[PrefixId].Name, Units[Equivalence[UnitId].MainUnitId].Name );
-
-		if(( Result = ParseExponent( p, &Exp, &HasSignedExponent, &CaretUsed, &HasDivisionBar )) < 0 )
-			return Result;
-
-		int	BaseUnit	= Equivalence[UnitId].MainUnitId;
-		Exp_s		   += Exp * Units[BaseUnit].Exponents.Exp_s;
-		Exp_m		   += Exp * Units[BaseUnit].Exponents.Exp_m;
-		Exp_kg		   += Exp * Units[BaseUnit].Exponents.Exp_kg;
-		Exp_A		   += Exp * Units[BaseUnit].Exponents.Exp_A;
-		Exp_K		   += Exp * Units[BaseUnit].Exponents.Exp_K;
-		Exp_mol		   += Exp * Units[BaseUnit].Exponents.Exp_mol;
-		Exp_cd		   += Exp * Units[BaseUnit].Exponents.Exp_cd;
-		IsAngle		   |= Units[BaseUnit].Exponents.IsAngle;
-		IsRadiation	   |= Units[BaseUnit].Exponents.IsRadiation;
-
-		if( Exp > 0 )
-			Scale	*= pow( Prefixes[PrefixId].Value * Equivalence[UnitId].Scale, Exp );
-		else if( Exp < 0 )
-			Scale	/= pow( Prefixes[PrefixId].Value * Equivalence[UnitId].Scale, -Exp );
-
-		if( **p == '.' || **p == '*' )
-			{
-			if( Multiplier != 0 && **p != Multiplier )
-				return RESULT_ERROR_MIXING_DOT_AND_ASTERISK;
-			Multiplier	= **p;
-			}
-
-		if( HasSignedExponent && HasDivisionBar )
-			return RESULT_ERROR_DIVISION_WITH_NEGATIVE_EXPONENT;
-
-		if( **p != '.' && **p != '*' && **p != '/' )
-			break;
-
-		if( **p == '.' || **p == '*' )
-			(*p)++;
-		}
-
-	if( Signature != NULL )
-		{
-		Signature->Exp_s		= Exp_s;
-		Signature->Exp_m		= Exp_m;
-		Signature->Exp_kg		= Exp_kg;
-		Signature->Exp_A		= Exp_A;
-		Signature->Exp_K		= Exp_K;
-		Signature->Exp_mol		= Exp_mol;
-		Signature->Exp_cd		= Exp_cd;
-		Signature->IsAngle		= IsAngle;
-		Signature->IsRadiation	= IsRadiation;
-		Signature->ScaleFactor	= Scale;
-		}
-//	PrintExpandedUnit( Signature, MODE_USE_SUPERSCRIPT );
-
-	return RESULT_OK;
-	}
-/*============================================================================*/
-int	ParseNumber( const char ** const p, double * const Value )
-	{
-	const char	*q;
-	int			HasDigits;
-
-	if( p == NULL || *p == NULL || Value == NULL )
-		return RESULT_ERROR_ARGUMENTS;
-
-	SkipBlanks( p );
-
-//	if( !isdigit( **p ) && **p != '.' )
-//		return RESULT_ERROR_VALUE_NOT_FOUND;
-
-	q	= *p;
-
-	for( HasDigits = 0; isdigit( **p ); (*p)++ )
-		HasDigits	= 1;
-	if( **p == '.' )
-		(*p)++;
-	for( ; isdigit( **p ); (*p)++ )
-		HasDigits	= 1;
-	if( !HasDigits )
-		return RESULT_INVALID_NUMBER;
-	if( **p == 'e' )
-		{
-		(*p)++;
-		if( **p == '+' || **p == '-' )
-			(*p)++;
-		if( !isdigit( **p ))
-			return RESULT_INVALID_NUMBER;
-		for( ; isdigit( **p ); (*p)++ )
-			{}
-		}
-
-	if( **p == '.' )
-		return RESULT_INVALID_NUMBER;
-
-	if( sscanf( q, "%lf", Value ) < 1 )
-		return RESULT_INVALID_NUMBER;
-
-	return RESULT_OK;
-	}
-/*============================================================================*/
-int ParseValueWithUnitExpr( const char ** const p, double * const Value, unitid_t UnitId, int Flags )
-	{
-	int				Result;
-	double			Temp;
-	unitsignature_t	Signature;
-	unitid_t		UnitIdTemp;
-
-	if( p == NULL || *p == NULL || Value == NULL )
-		return RESULT_ERROR_ARGUMENTS;
-
-	if(( Result = ParseNumber( p, &Temp )) < RESULT_OK )
-		return Result;
-
-	if(( Flags & REQUIRE_SPACE ) && !isspace( **p ) )
-		return RESULT_INVALID_NUMBER;
-
-	if(( Result = ParseUnitsExpression( p, &Signature )) < RESULT_OK )
-		return Result;
-
-	if(( UnitIdTemp = FindUnitId( &Signature )) < UNIT_NONE )
-		return RESULT_ERROR_WRONG_UNIT;
-
-	if( UnitIdTemp == UNIT_NONE && ( Flags & REQUIRE_UNIT))
-		return RESULT_ERROR_UNIT_NOT_SUPPLIED;
-
-	if( UnitIdTemp != UNIT_NONE && UnitIdTemp != UnitId )
-		return RESULT_ERROR_WRONG_UNIT;
-
-	*Value	= Temp * Signature.ScaleFactor;
-	return RESULT_OK;
-	}
-/*============================================================================*/
-int ParseValueWithPrefixedUnit( const char ** const p, double * const Value, unitid_t UnitId, int Flags )
-	{
-	int				Result;
-	double			Temp;
-	unitid_t		UnitIdTemp;
-	prefixid_t		PrefixId;
-
-	if( p == NULL || *p == NULL || Value == NULL )
-		return RESULT_ERROR_ARGUMENTS;
-
-	if(( Result = ParseNumber( p, &Temp )) < RESULT_OK )
-		return Result;
-
-	if(( Flags & REQUIRE_SPACE ) && !isspace( **p ) )
-		return RESULT_INVALID_NUMBER;
-
-	if(( Result = ParsePrefixedUnit( p, &PrefixId, &UnitIdTemp )) < UNIT_NONE )
-		return Result;
-
-	if( UnitIdTemp == UNIT_NONE && ( Flags & REQUIRE_UNIT))
-		return RESULT_ERROR_UNIT_NOT_SUPPLIED;
-
-	if( UnitIdTemp != UNIT_NONE && UnitIdTemp != UnitId )
-		return RESULT_ERROR_WRONG_UNIT;
-
-	*Value	= Temp * GetPrefixValue( PrefixId );
-	return RESULT_OK;
-	}
-/*============================================================================*/
 int TestUnits( void )
 	{
 	int			i, j;
@@ -1453,7 +1811,7 @@ int TestUnits( void )
 			{
 			sprintf( Str, "%s%s", PrefixAlias[j].String, UnitsAlias[i].String );
 			p	= Str;
-			if( ParsePrefixedUnit( &p, &PrefixId, &UnitId ) > 0 )
+			if( ParsePrefixedUnit( &p, &PrefixId, &UnitId, 0 ) > 0 )
 				{
 				//printf( "%s -> %s%s %s%s\n", Str, Prefixes[PrefixId].Name, Units[Equivalence[UnitId].MainUnitId].Name, Prefixes[PrefixId].Symbol, Units[Equivalence[UnitId].MainUnitId].Symbol );
 				if( UnitId != UnitsAlias[i].UnitId || PrefixId != PrefixAlias[j].PrefixId )
