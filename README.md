@@ -35,152 +35,152 @@ Value = 2.97297 V ( "volt" = kg.m²/(A.s³) = electric potential )
 It understands all the S.I. prefixes and units, and exponents.
 The units it understands:
 
-Second
-Meter
-Kilogram
-Ampere
-Kelvin
-Mole
-Candela
-Radian
-Steradian
-Hertz
-Newton
-Pascal
-Joule
-Watt
-Coulomb
-Volt
-Ohm
-Siemens
-Farad
-Henry
-Tesla
-Weber
-Becquerel
-Gray
-Sievert
-Katal
-Poise
-Stokes
-Lumen
-Degree
-Grade
-Arc-Minute
-Arc-Second
-Degree Celsius
-Degree Fahrenheit
-Degree Rankine
-Degree Reaumur
-Fermi
-Angstrom
-Micron
-Mil
-Point
-Pica
-Inch
-Foot
-Survey Foot
-Yard
-Fathom
-Rod
-Chain
-Furlong
-Mile
-Nautical Mile
-Land League
-Marine League
-Brazilian League
-Astronomical Unit
-Light-Year
-Parsec
-Barn
-Are
-Acre
-Alqueire Paulista
-Alqueire Goiano
-Teaspoon
-Tablespoon
-UK Fluid Ounce
-US Fluid Ounce
-Cup
-US Pint
-UK Pint
-Quart
-Liter
-Boardfoot
-US Gallon
-Canada Gallon
-UK Gallon
-Peck
-Bushel
-Barrel
-Stere
-Knot
-Kilometer Per Hour
-Mile Per Hour
-Speed Of Light
-Standard Gravity
-Gram
-Carat
-Grain
-Pound
-Pound-Troy
-Ounce
-Ounce-Troy
-Slug
-Metric Tonne
-Short Tonne
-Long Tonne
-Atomic Mass Unit
-Stone
-US Hundredweight
-UK Hundredweight
-Arroba
-Portugal Arroba
-Castela Arroba
-Cataluna Arroba
-Aragon Arroba
-Julian Year
-Gregorian Year
-Tropical Year
-Fortnight
-Week
-Day
-Hour
-Minute
-Rpm
-Electron-Volt
-Erg
-Calorie
-British Thermal Unit
-Watt-Hour
-Therm
-Torricelli
-Pound Per Square Inch
-Millimeter Of Mercury
-Inch Of Mercury
-Inch Of Water
-Meter Of Water
-Bar
-Standard Atmosphere
-Horsepower
-Pound-Force
-Poundal
-Gram-Force
-Dyne
-Kip
-Curie
-Roentgen
-Rad
-Lux
-Stilb
-Phot
-Lambert
-Footcandle
-Footlambert
-Faraday
-Ampere-Hour
-Mho
-Gauss
+Second,
+Meter,
+Kilogram,
+Ampere,
+Kelvin,
+Mole,
+Candela,
+Radian,
+Steradian,
+Hertz,
+Newton,
+Pascal,
+Joule,
+Watt,
+Coulomb,
+Volt,
+Ohm,
+Siemens,
+Farad,
+Henry,
+Tesla,
+Weber,
+Becquerel,
+Gray,
+Sievert,
+Katal,
+Poise,
+Stokes,
+Lumen,
+Degree,
+Grade,
+Arc-Minute,
+Arc-Second,
+Degree Celsius,
+Degree Fahrenheit,
+Degree Rankine,
+Degree Reaumur,
+Fermi,
+Angstrom,
+Micron,
+mil,
+Point,
+Pica,
+Inch,
+Foot,
+Survey Foot,
+Yard,
+Fathom,
+Rod,
+Chain,
+Furlong,
+Mile,
+Nautical Mile,
+Land League,
+Marine League,
+Brazilian League,
+Astronomical Unit,
+Light-Year,
+Parsec,
+Barn,
+Are,
+Acre,
+Alqueire Paulista,
+Alqueire Goiano,
+Teaspoon,
+Tablespoon,
+UK Fluid Ounce,
+US Fluid Ounce,
+Cup,
+US Pint,
+UK Pint,
+Quart,
+Liter,
+Boardfoot,
+US Gallon,
+Canada Gallon,
+UK Gallon,
+Peck,
+Bushel,
+Barrel,
+Stere,
+Knot,
+Kilometer Per Hour,
+Mile Per Hour,
+Speed Of Light,
+Standard Gravity,
+Gram,
+Carat,
+Grain,
+Pound,
+Pound-Troy,
+Ounce,
+Ounce-Troy,
+Slug,
+Metric Tonne,
+Short Tonne,
+Long Tonne,
+Atomic Mass Unit,
+Stone,
+US Hundredweight,
+UK Hundredweight,
+Arroba,
+Portugal Arroba,
+Castela Arroba,
+Cataluna Arroba,
+Aragon Arroba,
+Julian Year,
+Gregorian Year,
+Tropical Year,
+Fortnight,
+Week,
+Day,
+Hour,
+Minute,
+Rpm,
+Electron-Volt,
+Erg,
+Calorie,
+British Thermal Unit,
+Watt-Hour,
+Therm,
+Torricelli,
+Pound Per Square Inch,
+Millimeter Of Mercury,
+Inch Of Mercury,
+Inch Of Water,
+Meter Of Water,
+Bar,
+Standard Atmosphere,
+Horsepower,
+Pound-Force,
+Poundal,
+Gram-Force,
+Dyne,
+Kip,
+Curie,
+Roentgen,
+Rad,
+Lux,
+Stilb,
+Phot,
+Lambert,
+Footcandle,
+Footlambert,
+Faraday,
+Ampere-Hour,
+Mho,
+Gauss,
 Maxwell
