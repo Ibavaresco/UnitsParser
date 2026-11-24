@@ -11,17 +11,25 @@ t  = 10 s
 ac = 9.8 m/s^2
 
 Input:
+<p>
 50 m + 22 m/s * 10 s + (9.8 m/s² * (10 s) ^ 2) / 2
+<p>
 Result:
+<p>
 Value = 760 m ( "meter" = m = distance/length )
-
+<p>
+<p>
 Voltage divider:
-
+<p>
+<p>
 Input:
+<p>
 30 V * 3.3 kohm / ( 30 kohm + 3.3 kohm )
+<p>
 Result:
+<p>
 Value = 2.97297 V ( "volt" = kg.m²/(A.s³) = electric potential )
-
+<p>
 
 
 It understands all the S.I. prefixes and units, and exponents.
