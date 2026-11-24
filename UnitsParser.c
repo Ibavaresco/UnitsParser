@@ -1406,6 +1406,8 @@ static token_t GetToken( const char ** const p, dimensionalvalue_t * Value, int 
 	return TOKEN_NUMBER;
 	}
 /*============================================================================*/
+static type_t EvaluateAdditiveExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags );
+/*============================================================================*/
 static type_t EvaluateValueExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
 	{
 	token_t		Token;
@@ -1448,7 +1450,7 @@ static type_t EvaluateValueExpression( const char ** const p, dimensionalvalue_t
 			return TYPE_VALUE;
 		/*--------------------------------------------------------------------*/
 		case TOKEN_OPENPAR:
-			Type1			= EvaluateExpression( p, Result, Multiplier, Style, Flags );
+			Type1			= EvaluateAdditiveExpression( p, Result, Multiplier, Style, Flags );
 			Token			= GetToken( p, NULL, Multiplier, Style, Flags );;
 			if( Token != TOKEN_CLOSEPAR )
 				{
@@ -1470,7 +1472,11 @@ static type_t EvaluatePowerExpression( const char ** const p, dimensionalvalue_t
 	token_t		Token;
 	type_t		Type1, Type2;
 
-	Type1	= EvaluateValueExpression( p, Result, Multiplier, Style, Flags );
+	if(( Type1 = EvaluateValueExpression( p, Result, Multiplier, Style, Flags )) <= 0 )
+		{
+		printf( "\nError" );
+		return TYPE_INVALID;
+		}
 
 	q		= *p;
 
@@ -1525,7 +1531,11 @@ static type_t EvaluateMultiplicativeExpression( const char ** const p, dimension
 	token_t				Token;
 	type_t				Type1, Type2;
 
-	Type1	= EvaluatePowerExpression( p, Result, Multiplier, Style, Flags );
+	if(( Type1 = EvaluatePowerExpression( p, Result, Multiplier, Style, Flags )) <= 0 )
+		{
+		printf( "\nError" );
+		return TYPE_INVALID;
+		}
 
 	q		= *p;
 
@@ -1599,13 +1609,17 @@ static type_t EvaluateMultiplicativeExpression( const char ** const p, dimension
 	return TYPE_NUMBER;
 	}
 /*============================================================================*/
-type_t EvaluateExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
+static type_t EvaluateAdditiveExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
 	{
 	const char	*q;
 	token_t		Token;
 	type_t		Type1, Type2;
 
-	Type1	= EvaluateMultiplicativeExpression( p, Result, Multiplier, Style, Flags );
+	if(( Type1 = EvaluateMultiplicativeExpression( p, Result, Multiplier, Style, Flags )) <= 0 )
+		{
+		printf( "\nError" );
+		return TYPE_INVALID;
+		}
 
 	q		= *p;
 
@@ -1666,6 +1680,20 @@ type_t EvaluateExpression( const char ** const p, dimensionalvalue_t * const Res
 		}
 
 	return Type1;
+	}
+/*============================================================================*/
+type_t EvaluateExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
+	{
+	type_t	Type;
+
+	Type	= EvaluateAdditiveExpression( p, Result, Multiplier, Style, Flags );
+
+	SkipBlanks( p );
+
+	if( **p != '\0' )
+		return TYPE_INVALID;
+
+	return Type;
 	}
 /*============================================================================*/
 #if 1
