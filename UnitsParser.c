@@ -1590,7 +1590,13 @@ static type_t EvaluateMultiplicativeExpression( const char ** const p, dimension
 		*p		= q;
 		}
 
-	return Type1;
+	if( Result->Unit.IsRadiation || Result->Unit.IsAngle )
+		return TYPE_VALUE;
+	for( int i = 0; i < LENGTH( Result->Unit.Exponents ); i++ )
+		if( Result->Unit.Exponents[i] != 0 )
+			return TYPE_VALUE;
+
+	return TYPE_NUMBER;
 	}
 /*============================================================================*/
 type_t EvaluateExpression( const char ** const p, dimensionalvalue_t * const Result, int *Multiplier, int *Style, int Flags )
