@@ -863,6 +863,7 @@ const unitsalias_t	UnitsAlias[]	=
 		{ .String = "@CAS"			, .UnitId = UNIT_CASTELA_ARROBA				, .Flags = IGNORE_CASE },
 		{ .String = "@ARA"			, .UnitId = UNIT_ARAGON_ARROBA				, .Flags = IGNORE_CASE },
 		{ .String = "@"				, .UnitId = UNIT_ARROBA						, .Flags = 0 },
+		{ .String = "\x8f"			, .UnitId = UNIT_ANGSTROM					, .Flags = 0 },
 	};
 /*============================================================================*/
 const char *GetUnitName( unitid_t UnitId )
@@ -1247,8 +1248,8 @@ int ParseUnitExpression( const char ** const p, unitsignature_t * const Signatur
 		Signature->Exp_K	   -= Signature2.Exp_K;
 		Signature->Exp_mol	   -= Signature2.Exp_mol;
 		Signature->Exp_cd	   -= Signature2.Exp_cd;
-		Signature->IsAngle	   |= Signature2.IsAngle;
-		Signature->IsRadiation |= Signature2.IsRadiation;
+		Signature->IsAngle	   &= Signature2.IsAngle ? 0 : -1;
+		Signature->IsRadiation &= Signature2.IsRadiation ? 0 : -1;
 		Signature->ScaleFactor /= Signature2.ScaleFactor;
 		}
 
@@ -1592,8 +1593,8 @@ static type_t EvaluateMultiplicativeExpression( const char ** const p, dimension
 				Result->Unit.Exp_K		   -= Operand2.Unit.Exp_K;
 				Result->Unit.Exp_mol	   -= Operand2.Unit.Exp_mol;
 				Result->Unit.Exp_cd		   -= Operand2.Unit.Exp_cd;
-				Result->Unit.IsAngle	   |= Operand2.Unit.IsAngle;
-				Result->Unit.IsRadiation   |= Operand2.Unit.IsRadiation;
+				Result->Unit.IsAngle	   &= Operand2.Unit.IsAngle ? 0 : -1;
+				Result->Unit.IsRadiation   &= Operand2.Unit.IsRadiation ? 0 : -1;
 				break;
 			}
 
